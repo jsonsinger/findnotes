@@ -108,11 +108,10 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
 .mini .r span:last-child{color:var(--muted)}
 .mini .m{color:var(--muted);font-size:19px}
 .mini .tick{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:var(--muted);font-size:19px}
-.caret{display:inline-block;width:2px;height:20px;background:var(--ink);vertical-align:-3px;margin-left:2px;animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.fmt{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-top:12px;padding:6px 14px;border:2px solid var(--ink);border-radius:20px 14px 18px 16px;background:var(--card);font-size:22px}
+.fmt{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:12px;padding:6px 12px;border:2px solid var(--ink);border-radius:20px 14px 18px 16px;background:var(--card);font-size:22px}
+.fmt>*{display:flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:2px;border:2px solid transparent;border-radius:8px 6px 9px 5px;line-height:1}
 .slide{position:relative;margin-top:12px;height:44px;border:2px solid var(--ink);border-radius:24px 20px 22px 26px;background:var(--card);overflow:hidden}
-.knob{position:absolute;left:4px;top:4px;bottom:4px;width:96px;border:2px solid var(--ink);border-radius:20px 16px 18px 22px;background:var(--hl);display:grid;place-items:center;font-weight:700;animation:slide 3.2s ease-in-out infinite}
+.knob{position:absolute;left:4px;top:4px;bottom:4px;width:96px;border:2px solid var(--ink);border-radius:20px 16px 18px 22px;background:var(--hl);display:grid;place-items:center;font-weight:700}
 @keyframes slide{0%,25%{left:4px}65%,100%{left:calc(100% - 100px)}}
 .slide .chev{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--faint)}
 .search{display:flex;align-items:center;gap:8px;border:2px solid var(--ink);border-radius:18px 14px 16px 20px;padding:4px 10px;margin-bottom:6px}
@@ -133,7 +132,50 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 .mini .acts span{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;height:38px;border:2px solid var(--ink);border-radius:12px 9px 13px 8px;background:var(--card);font-size:20px}
 .mini .acts .del{color:#b3261e}
 .hlm{background:linear-gradient(transparent 50%,var(--hl-soft) 50%,var(--hl-soft) 94%,transparent 94%);padding:0 2px}
-.fmt .on{background:var(--hl);border:2px solid var(--ink);border-radius:8px 6px 9px 5px;padding:2px}
+.fmt .on{background:var(--hl);border-color:var(--ink)}
+
+/* The card animations play only while a card is hovered (.play). Phones without hover play each
+   one once as its card scrolls into view (.play.once). Nothing moves with reduced motion. */
+@keyframes blink{50%{opacity:0}}
+.ty .ch:not(.in){opacity:0}
+.ch.at{position:relative}
+.ch.at::after{content:"";position:absolute;right:-3px;top:.12em;width:2px;height:1em;background:var(--ink)}
+.play .ch.at::after{animation:blink 1.1s steps(1) infinite}
+.ty .hlm{background:none;padding:0}
+.ty .hlm .ch.in{background:linear-gradient(transparent 50%,var(--hl-soft) 50%,var(--hl-soft) 94%,transparent 94%)}
+/* 1: more lists roll past */
+.mini.lists{padding-block:4px}
+.lists .win{height:120px;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 8%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 8%,#000 78%,transparent)}
+.roll .r{height:38px;align-items:center;padding:0}
+.roll{padding-top:6px}
+.play .roll{animation:roll 7.2s ease-in-out infinite}
+.once .roll{animation-iteration-count:1}
+@keyframes roll{0%,8%{transform:none}16.7%,25%{transform:translateY(-38px)}33.3%,41.7%{transform:translateY(-76px)}50%,58.3%{transform:translateY(-114px)}66.7%,75%{transform:translateY(-152px)}83.3%,91.7%{transform:translateY(-190px)}100%{transform:translateY(-228px)}}
+/* 2: the tick pops when the last word saves */
+.tick .ic{border-radius:50%;padding:2px}
+.tick.pop .ic{background:var(--hl);animation:pop .45s ease-out}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:none}}
+/* 4: the knob slides across */
+.play .knob{animation:slide 3.2s ease-in-out infinite}
+.once .knob{animation-iteration-count:1;animation-fill-mode:forwards}
+/* 5: results drop away as the search narrows */
+.mini.find{height:202px}
+.find mark{padding:0}
+.find .r{max-height:40px;padding-block:3px;transition:max-height .25s,opacity .2s,padding .25s}
+.find .r.gone{max-height:0;opacity:0;padding-block:0;border-width:0}
+/* 6: the Wi-Fi goes off, Export is pressed anyway, and a backup file lands on the phone */
+.off{display:flex;align-items:center;gap:6px}
+.off .waves{opacity:.55}
+.off .cut{stroke-dasharray:1;stroke-dashoffset:0}
+.play .off .cut{animation:cut .4s ease-out backwards}
+@keyframes cut{from{stroke-dashoffset:1}}
+.acts .exp{transition:background .2s,transform .15s}
+.play .acts .exp{animation:press .5s .6s ease-in-out;background:var(--hl);transition:background .2s .7s}
+@keyframes press{50%{transform:scale(.93)}}
+.saved{display:flex;white-space:nowrap;align-items:center;gap:6px;margin-top:10px;font-size:19px;color:var(--muted);opacity:0;transform:translateY(-6px);transition:opacity .15s,transform .15s}
+.saved em{font-style:normal;color:var(--ink);padding:0 2px;background:linear-gradient(var(--hl-soft),var(--hl-soft)) no-repeat 0 70%/0% 50%;transition:background-size .15s}
+.play .saved{opacity:1;transform:none;transition:opacity .3s 1.2s,transform .3s 1.2s}
+.play .saved em{background-size:100% 50%;transition:background-size .5s 1.6s}
 .cards .idx.cta{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;transform:rotate(-.4deg)}
 .idx.cta .big-btn{margin-top:0!important}
 .idx.cta h3{font-size:46px}
@@ -182,6 +224,7 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
   <symbol id="flame" viewBox="0 0 24 24"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></symbol>
   <symbol id="map" viewBox="0 0 24 24"><path d="M9 4L3 6.5V20l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4zM9 4v13.5M15 6.5V20"/></symbol>
   <symbol id="marker" viewBox="0 0 24 24"><path d="M14.5 4.5l5 5-8 8h-5v-5zM6.5 12.5l5 5M4 21h9"/></symbol>
+  <symbol id="wifi" viewBox="0 0 24 24"><path d="M1.5 9a16 16 0 0 1 21 0M5 12.6a11 11 0 0 1 14 0M8.5 16.1a6 6 0 0 1 7 0M12 20h.01"/></symbol>
   <symbol id="restore" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"/></symbol>
   <symbol id="search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="M20 20l-5.2-5.2"/></symbol>
   <symbol id="task" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M8 12.3l2.7 2.7L16.2 9.4"/></symbol>
@@ -222,34 +265,40 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 
     <div class="section-head"><h2>What's inside</h2><p>Everything you need. Nothing you don't.</p></div>
     <div class="cards">
-      <article class="idx">
+      <article class="idx" data-play="lists">
         <h3><span class="num">1</span>Lists of lists</h3>
         <p>Every adventure gets its own list. Swipe sideways to move from one to the next.</p>
-        <div class="mini" aria-hidden="true">
+        <div class="mini lists" aria-hidden="true"><div class="win"><div class="roll">
           <div class="r"><span>Groceries</span><span>6</span></div>
           <div class="r"><span>Weekend away</span><span>12</span></div>
           <div class="r"><span>Garden</span><span>3</span></div>
-        </div>
+          <div class="r"><span>Books to find</span><span>9</span></div>
+          <div class="r"><span>Gift ideas</span><span>4</span></div>
+          <div class="r"><span>Recipes to try</span><span>7</span></div>
+          <div class="r"><span>Groceries</span><span>6</span></div>
+          <div class="r"><span>Weekend away</span><span>12</span></div>
+          <div class="r"><span>Garden</span><span>3</span></div>
+        </div></div></div>
       </article>
-      <article class="idx">
+      <article class="idx" data-play="save">
         <h3><span class="num">2</span>Autosave</h3>
         <p>Edits save themselves. A small gold tick shows when something is still waiting.</p>
         <div class="mini" aria-hidden="true">
           <b>Tent checklist</b>
-          <div class="m">Pack the gas stove, the good torch and the map nobody trusts.<span class="caret"></span></div>
-          <div class="tick"><span>saved 2 min ago</span><svg class="ic" width="22" height="22"><use href="#check"/></svg></div>
+          <div class="m">Pack the gas stove, the good torch and the map nobody <span class="ty">trusts.</span></div>
+          <div class="tick"><span class="st">saved 2 min ago</span><svg class="ic" width="22" height="22"><use href="#check"/></svg></div>
         </div>
       </article>
-      <article class="idx">
+      <article class="idx" data-play="format">
         <h3><span class="num">3</span>Format as you write</h3>
         <p>A small floating toolbar for headings, bold, italic, bullets, tick boxes and a highlighter.</p>
         <div class="mini" aria-hidden="true">
           <b>Camping checklist</b>
-          <div class="m">Pack the stove and the <b style="color:var(--ink)">good torch</b>. Tent pegs (<span class="hlm" style="color:var(--ink)">the long ones</span>).</div>
-          <div class="fmt"><span>H<sub>2</sub></span><b>B</b><i>I</i><svg class="ic" width="20" height="20"><use href="#bullets"/></svg><svg class="ic" width="20" height="20"><use href="#task"/></svg><svg class="ic on" width="24" height="24"><use href="#marker"/></svg></div>
+          <div class="m ty">Pack the stove and the <b style="color:var(--ink)">good torch</b>. Tent pegs (<span class="hlm" style="color:var(--ink)">the long ones</span>).</div>
+          <div class="fmt"><span>H<sub>2</sub></span><b class="tb-b">B</b><i>I</i><svg class="ic" width="28" height="28"><use href="#bullets"/></svg><svg class="ic" width="28" height="28"><use href="#task"/></svg><svg class="ic on tb-hl" width="28" height="28"><use href="#marker"/></svg></div>
         </div>
       </article>
-      <article class="idx">
+      <article class="idx" data-play="archive">
         <h3><span class="num">4</span>Slide to archive</h3>
         <p>Pick what you have done, then slide to put it away. A deliberate slide, so nothing leaves a list by accident.</p>
         <div class="mini" aria-hidden="true">
@@ -257,21 +306,24 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
           <div class="slide"><span class="chev">› › ›</span><div class="knob">Archive</div></div>
         </div>
       </article>
-      <article class="idx">
+      <article class="idx" data-play="find">
         <h3><span class="num">5</span>Find anything</h3>
         <p>One search across every list and note you have written.</p>
-        <div class="mini" aria-hidden="true">
-          <div class="search"><svg class="ic" width="18" height="18"><use href="#search"/></svg>tor<span class="caret"></span></div>
-          <div class="r"><span><mark>Tor</mark>ch batteries</span><span class="m">Groceries</span></div>
-          <div class="r"><span>Tent checklist</span><span class="m">Weekend</span></div>
+        <div class="mini find" aria-hidden="true">
+          <div class="search"><svg class="ic" width="18" height="18"><use href="#search"/></svg><span class="ty q">tor</span></div>
+          <div class="r" data-k="torch batteries"><span class="nm"><mark>Tor</mark>ch batteries</span><span class="m">Groceries</span></div>
+          <div class="r" data-k="tent checklist the good torch"><span class="nm">Tent checklist</span><span class="m">Weekend</span></div>
+          <div class="r gone" data-k="tomato seeds"><span class="nm">Tomato seeds</span><span class="m">Garden</span></div>
+          <div class="r gone" data-k="bread"><span class="nm">Bread</span><span class="m">Groceries</span></div>
         </div>
       </article>
-      <article class="idx">
+      <article class="idx" data-play="device">
         <h3><span class="num">6</span>Stored on your device</h3>
         <p>No account, no cloud. Your lists live on your phone, with a backup file whenever you want one.</p>
         <div class="mini" aria-hidden="true">
-          <div class="r"><span>Your notes</span><span>5 lists · 34 items</span></div>
-          <div class="acts"><span><svg class="ic" width="18" height="18"><use href="#download"/></svg>Export</span><span><svg class="ic" width="18" height="18"><use href="#restore"/></svg>Restore</span></div>
+          <div class="r"><span>5 lists · 34 items</span><span class="off"><svg class="ic" width="22" height="22" viewBox="0 0 24 24"><use href="#wifi" class="waves"/><path class="cut" d="M3 3l18 18" pathLength="1"/></svg>offline</span></div>
+          <div class="acts"><span class="exp"><svg class="ic" width="18" height="18"><use href="#download"/></svg>Export</span><span><svg class="ic" width="18" height="18"><use href="#restore"/></svg>Restore</span></div>
+          <div class="saved"><svg class="ic" width="18" height="18"><use href="#check"/></svg><em>Backup</em> saved on this phone</div>
         </div>
       </article>
       <article class="idx cta">
@@ -296,5 +348,123 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
   </div>
 </main>
 
+<script>
+// Feature card animations: they play while a card is hovered and reset when the pointer leaves.
+// Without hover (phones), each plays once as its card scrolls into view. Reduced motion: none.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Splits an element's text into one span per letter, after an empty anchor for the caret.
+  const prep = el => {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      node.replaceWith(...[...node.data].map(c => {
+        const span = document.createElement('span');
+        span.className = 'ch';
+        span.textContent = c;
+        return span;
+      }));
+    }
+    const anchor = document.createElement('span');
+    anchor.className = 'ch';
+    el.prepend(anchor);
+    return [...el.querySelectorAll('.ch')];
+  };
+  // Shows the first n letters with the caret after the last one.
+  const show = (chars, n) => chars.forEach((c, i) => {
+    c.classList.toggle('in', i <= n);
+    c.classList.toggle('at', i === n);
+  });
+
+  const setups = {
+    save(card) {
+      const chars = prep(card.querySelector('.ty')), end = chars.length - 1;
+      const tick = card.querySelector('.tick'), status = card.querySelector('.st');
+      return {
+        reset() { show(chars, end); status.textContent = 'saved 2 min ago'; tick.classList.remove('pop'); },
+        play(at) {
+          show(chars, 0);
+          let t = 500;
+          for (let i = 1; i <= end; i++) at(t += 130, () => show(chars, i));
+          at(t + 1000, () => { status.textContent = 'saved 1 sec ago'; tick.classList.add('pop'); });
+        },
+      };
+    },
+    format(card) {
+      const chars = prep(card.querySelector('.ty')), end = chars.length - 1;
+      const bold = card.querySelector('.tb-b'), marker = card.querySelector('.tb-hl');
+      return {
+        reset() { show(chars, end); chars[end].classList.remove('at'); bold.classList.remove('on'); marker.classList.add('on'); },
+        play(at) {
+          show(chars, 0);
+          bold.classList.remove('on');
+          marker.classList.remove('on');
+          let t = 400;
+          for (let i = 1; i <= end; i++) at(t += 55, () => {
+            show(chars, i);
+            bold.classList.toggle('on', !!chars[i].closest('b'));
+            marker.classList.toggle('on', !!chars[i].closest('.hlm'));
+          });
+        },
+      };
+    },
+    find(card) {
+      const chars = prep(card.querySelector('.q')), word = 'tor';
+      const rows = [...card.querySelectorAll('[data-k]')].map(row => {
+        const name = row.querySelector('.nm');
+        return { row, name, text: name.textContent };
+      });
+      // Keeps the rows that match and marks the match in each name.
+      const filter = q => rows.forEach(({ row, name, text }) => {
+        row.classList.toggle('gone', !row.dataset.k.includes(q));
+        const i = q ? text.toLowerCase().indexOf(q) : -1;
+        if (i < 0) return name.replaceChildren(text);
+        const mark = document.createElement('mark');
+        mark.textContent = text.slice(i, i + q.length);
+        name.replaceChildren(text.slice(0, i), mark, text.slice(i + q.length));
+      });
+      return {
+        reset() { show(chars, word.length); filter(word); },
+        play(at) {
+          show(chars, 0);
+          filter('');
+          for (let i = 1; i <= word.length; i++) at(300 + 550 * i, () => { show(chars, i); filter(word.slice(0, i)); });
+        },
+      };
+    },
+  };
+
+  const hover = matchMedia('(hover: hover)').matches;
+  const inView = !hover && 'IntersectionObserver' in window && new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { inView.unobserve(e.target); e.target.start(true); }
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('[data-play]').forEach(card => {
+    const anim = setups[card.dataset.play]?.(card);
+    let timers = [];
+    const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+    const stop = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      card.classList.remove('play', 'once');
+      anim?.reset();
+    };
+    card.start = once => {
+      stop();
+      card.classList.add('play');
+      card.classList.toggle('once', once);
+      anim?.play(at);
+    };
+    anim?.reset();
+    if (hover) {
+      card.addEventListener('mouseenter', () => card.start(false));
+      card.addEventListener('mouseleave', stop);
+    } else if (inView) {
+      inView.observe(card);
+    }
+  });
+})();
+</script>
 </body>
 </html>
