@@ -163,14 +163,19 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 .find mark{padding:0}
 .find .r{max-height:40px;padding-block:3px;transition:max-height .25s,opacity .2s,padding .25s}
 .find .r.gone{max-height:0;opacity:0;padding-block:0;border-width:0}
-/* 6: Export is pressed and a backup file lands on the phone */
+/* 6: the Wi-Fi goes off, Export is pressed anyway, and a backup file lands on the phone */
+.off{display:flex;align-items:center;gap:6px}
+.off .waves{opacity:.55}
+.off .cut{stroke-dasharray:1;stroke-dashoffset:0}
+.play .off .cut{animation:cut .4s ease-out backwards}
+@keyframes cut{from{stroke-dashoffset:1}}
 .acts .exp{transition:background .2s,transform .15s}
-.play .acts .exp{animation:press .5s .3s ease-in-out;background:var(--hl);transition:background .2s .4s}
+.play .acts .exp{animation:press .5s .6s ease-in-out;background:var(--hl);transition:background .2s .7s}
 @keyframes press{50%{transform:scale(.93)}}
-.saved{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:19px;color:var(--muted);opacity:0;transform:translateY(-6px);transition:opacity .15s,transform .15s}
+.saved{display:flex;white-space:nowrap;align-items:center;gap:6px;margin-top:10px;font-size:19px;color:var(--muted);opacity:0;transform:translateY(-6px);transition:opacity .15s,transform .15s}
 .saved em{font-style:normal;color:var(--ink);padding:0 2px;background:linear-gradient(var(--hl-soft),var(--hl-soft)) no-repeat 0 70%/0% 50%;transition:background-size .15s}
-.play .saved{opacity:1;transform:none;transition:opacity .3s .9s,transform .3s .9s}
-.play .saved em{background-size:100% 50%;transition:background-size .5s 1.3s}
+.play .saved{opacity:1;transform:none;transition:opacity .3s 1.2s,transform .3s 1.2s}
+.play .saved em{background-size:100% 50%;transition:background-size .5s 1.6s}
 .cards .idx.cta{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;transform:rotate(-.4deg)}
 .idx.cta .big-btn{margin-top:0!important}
 .idx.cta h3{font-size:46px}
@@ -219,6 +224,7 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
   <symbol id="flame" viewBox="0 0 24 24"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></symbol>
   <symbol id="map" viewBox="0 0 24 24"><path d="M9 4L3 6.5V20l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4zM9 4v13.5M15 6.5V20"/></symbol>
   <symbol id="marker" viewBox="0 0 24 24"><path d="M14.5 4.5l5 5-8 8h-5v-5zM6.5 12.5l5 5M4 21h9"/></symbol>
+  <symbol id="wifi" viewBox="0 0 24 24"><path d="M1.5 9a16 16 0 0 1 21 0M5 12.6a11 11 0 0 1 14 0M8.5 16.1a6 6 0 0 1 7 0M12 20h.01"/></symbol>
   <symbol id="restore" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"/></symbol>
   <symbol id="search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="M20 20l-5.2-5.2"/></symbol>
   <symbol id="task" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M8 12.3l2.7 2.7L16.2 9.4"/></symbol>
@@ -315,9 +321,9 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
         <h3><span class="num">6</span>Stored on your device</h3>
         <p>No account, no cloud. Your lists live on your phone, with a backup file whenever you want one.</p>
         <div class="mini" aria-hidden="true">
-          <div class="r"><span>Your notes</span><span>5 lists · 34 items</span></div>
+          <div class="r"><span>5 lists · 34 items</span><span class="off"><svg class="ic" width="22" height="22" viewBox="0 0 24 24"><use href="#wifi" class="waves"/><path class="cut" d="M3 3l18 18" pathLength="1"/></svg>offline</span></div>
           <div class="acts"><span class="exp"><svg class="ic" width="18" height="18"><use href="#download"/></svg>Export</span><span><svg class="ic" width="18" height="18"><use href="#restore"/></svg>Restore</span></div>
-          <div class="saved"><svg class="ic" width="18" height="18"><use href="#check"/></svg><em>FindNotes-backup.json</em> saved</div>
+          <div class="saved"><svg class="ic" width="18" height="18"><use href="#check"/></svg><em>Backup</em> saved on this phone</div>
         </div>
       </article>
       <article class="idx cta">
