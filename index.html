@@ -143,15 +143,6 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 .idx.cta p{color:var(--ink)}
 .idx.cta .big-btn{margin-top:22px;background:var(--card);font-size:28px;min-height:54px}
 
-.get{margin-top:120px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;max-width:860px;margin-inline:auto}
-.get-doodle{width:150px;height:240px}
-.get h2{font-family:var(--hand);font-size:clamp(40px,5vw,56px);font-weight:700;line-height:1}
-.get p{margin-top:10px;font-size:18px;color:var(--soft)}
-.addr-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;margin-top:22px}
-.addr{display:inline-flex;padding:10px 26px;background:var(--card);font-family:var(--hand);font-size:40px;font-weight:700;line-height:1;transform:rotate(-.8deg);user-select:all}
-.copy{font-family:var(--hand);font-size:22px;font-weight:600;border-bottom:2px solid var(--faint);padding-bottom:1px}
-.get .links{font-size:16px;color:var(--muted)}
-.get .links a{border-bottom:2px solid var(--faint)}
 
 .faq{margin-top:110px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 56px}
 .faq-head{grid-column:1/-1;font-family:var(--hand);font-size:clamp(40px,5vw,56px);font-weight:700;line-height:1}
@@ -167,9 +158,6 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 }
 @media (max-width:600px){
   .cards{grid-template-columns:1fr}
-  .get{grid-template-columns:1fr;text-align:center}
-  .get-doodle{display:none}
-  .addr-row{justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -204,7 +192,7 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
   <div class="land">
     <div class="top">
       <div class="brand"><svg class="ic" width="32" height="32" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg>FindNotes</div>
-      <a class="wob pill-link" href="#get" data-scroll>Add to your phone</a>
+      <a class="wob pill-link" href="https://app.findnotes.io/">Add to your phone</a>
     </div>
 
     <div class="hero">
@@ -212,7 +200,7 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
         <h1>A list of lists for your <span class="hl">everyday adventures.</span></h1>
         <p class="lede">Groceries, the weekend away, books you're hunting for. Each one gets its own page, and they all live on your phone.</p>
         <div class="cta-line">
-          <a class="wob big-btn" href="#get" data-scroll><svg class="ic" width="28" height="28" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg>Get FindNotes</a>
+          <a class="wob big-btn" href="https://app.findnotes.io/"><svg class="ic" width="28" height="28" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg>Get FindNotes</a>
           <span class="note">free · no account · works offline</span>
         </div>
       </div>
@@ -289,34 +277,15 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
       <article class="idx cta">
         <div><h3>Start your first list.</h3>
         <p>Free. Works offline. No account.</p></div>
-        <a class="wob big-btn" href="#get" data-scroll>Add to your phone</a>
+        <a class="wob big-btn" href="https://app.findnotes.io/">Add to your phone</a>
       </article>
-    </div>
-
-    <div class="get" id="get">
-      <svg class="get-doodle" viewBox="0 0 150 240" aria-hidden="true" filter="url(#rough)">
-        <rect x="14" y="8" width="122" height="224" rx="26" fill="#ffffff" stroke="#2b2a26" stroke-width="2.5"/>
-        <rect x="56" y="20" width="38" height="8" rx="4" fill="#2b2a26"/>
-        <rect x="46" y="92" width="58" height="58" rx="14" fill="#f9dd7a" stroke="#2b2a26" stroke-width="2.5"/>
-        <g transform="translate(60 106) scale(1.25)" fill="none" stroke="#2b2a26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#flame" width="24" height="24"/></g>
-        <text x="75" y="176" text-anchor="middle" font-family="Caveat, cursive" font-size="20" font-weight="600" fill="#2b2a26">FindNotes</text>
-      </svg>
-      <div>
-        <h2>Best on a <span class="hl">phone.</span></h2>
-        <p>Open this address on your phone, then add it to your home screen. There's no app store.</p>
-        <div class="addr-row">
-          <span class="wob addr" id="addr">app.findnotes.io</span>
-          <button type="button" class="copy" id="copy">copy it</button>
-        </div>
-        <p class="links" style="margin-top:22px">Want the steps? <a href="https://app.findnotes.io/welcome.html?show=ios">iPhone</a> · <a href="https://app.findnotes.io/welcome.html?show=android">Android</a></p>
-      </div>
     </div>
 
     <dl class="faq">
       <h2 class="faq-head">Questions</h2>
       <div><dt>Is it really free?</dt><dd>Yes. No account, no sign-up, nothing to pay.</dd></div>
       <div><dt>Where are my notes kept?</dt><dd>On your phone, inside the app. Nothing is uploaded and nothing syncs.</dd></div>
-      <div><dt>How do I get it?</dt><dd>Open app.findnotes.io on your phone and add it to your home screen.</dd></div>
+      <div><dt>How do I get it?</dt><dd>Tap Get FindNotes on your phone. The app shows you how to add it to your home screen.</dd></div>
       <div><dt>Can I back it up?</dt><dd>Yes. Export everything to a file from Settings and restore it any time.</dd></div>
     </dl>
 
@@ -327,25 +296,5 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
   </div>
 </main>
 
-<script>
-(function () {
-  // "Get FindNotes" and "Add to your phone" glide down to the address.
-  document.addEventListener('click', function (e) {
-    var t = e.target.closest('[data-scroll]');
-    if (!t) return;
-    e.preventDefault();
-    var smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.getElementById('get').scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
-  });
-
-  // Copy the address, or select it where the clipboard isn't allowed.
-  document.getElementById('copy').addEventListener('click', function () {
-    var btn = this;
-    function ok() { btn.textContent = 'copied!'; setTimeout(function () { btn.textContent = 'copy it'; }, 1600); }
-    function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById('addr')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-    try { navigator.clipboard.writeText('app.findnotes.io').then(ok, sel); } catch (err) { sel(); }
-  });
-})();
-</script>
 </body>
 </html>
