@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's new · FindNotes</title>
+<meta name="description" content="What has changed in FindNotes, and what's coming next.">
+<meta name="theme-color" content="#f8f8ff">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/Caveat.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* The landing page's sketchbook look: Caveat to write, Karla to read, white paper and a highlighter. */
+@font-face{font-family:'Caveat';src:url(fonts/Caveat.woff2) format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Karla';src:url(fonts/Karla.woff2) format('woff2');font-weight:400 800;font-display:swap}
+
+:root{
+  color-scheme:light;
+  --ink:#2b2a26;--soft:#45474d;--muted:#55585f;--faint:#8b8e96;--dash:#c5c8d0;
+  --paper:#f8f8ff;--card:#ffffff;--hl:#f9dd7a;--hl-soft:rgba(249,221,122,.75);--tape:rgba(249,221,122,.6);
+  --hand:'Caveat','Segoe Print','Bradley Hand',cursive;
+  --body:'Karla',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}
+a{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px dashed var(--ink);outline-offset:4px;border-radius:8px}
+h1,h2,h3,p,ol,ul{margin:0;padding:0}
+.paper{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.defs{position:absolute;width:0;height:0}
+main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
+.wrap{max-width:1120px;margin:0 auto;padding-top:18px}
+.ic{fill:none;stroke:var(--ink);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hl{background:linear-gradient(transparent 52%,var(--hl-soft) 52%,var(--hl-soft) 92%,transparent 92%);padding:0 6px}
+.wob{border:2px solid var(--ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--hand);font-size:32px;font-weight:700;line-height:1}
+.pill-link{font-family:var(--hand);font-size:24px;font-weight:700;padding:8px 20px 10px;background:var(--card);transition:transform .15s}
+.pill-link:hover{transform:rotate(-2deg)}
+.stage-tag{display:inline-flex;align-items:baseline;gap:6px;margin-left:4px;padding:3px 11px 5px;background:var(--hl);border:2px solid var(--ink);border-radius:14px 9px 13px 8px/9px 13px 8px 14px;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1;transform:rotate(-4deg) translateY(-3px)}
+.stage-tag small{font-family:var(--body);font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--soft)}
+.stage-tag small:empty{display:none}
+
+/* Heading on the left, the current version on a taped card on the right */
+.head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px 40px;align-items:end;padding-top:56px}
+.head h1{font-family:var(--hand);font-size:clamp(56px,8vw,104px);line-height:.9}
+.lede{margin-top:20px;font-size:20px;line-height:1.45;color:var(--soft);max-width:40ch}
+.card{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:22px 18px 24px 16px/18px 24px 16px 22px}
+.card::before{content:"";position:absolute;top:-13px;left:50%;width:92px;height:26px;margin-left:-46px;background:var(--tape);transform:rotate(-3deg);border-left:2px dotted rgba(43,42,38,.15);border-right:2px dotted rgba(43,42,38,.15)}
+.now{min-width:250px;padding:26px 24px 20px;transform:rotate(1.5deg)}
+.now .k{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.now .v{display:flex;align-items:baseline;gap:12px;margin-top:6px;min-height:54px;font-family:var(--hand);font-size:54px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.stamp{font-family:var(--hand);font-size:22px;padding:1px 10px 3px;border:2px solid var(--ink);border-radius:8px 6px 9px 5px;background:var(--hl);transform:rotate(-6deg)}
+.now p{margin-top:8px;font-size:15px;color:var(--muted)}
+
+/* Changelog on the left; the roadmap is narrower and stays in view while you scroll */
+.cols{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:40px 34px;margin-top:64px;align-items:start}
+.col{min-width:0;padding:28px 24px 22px}
+.col.log{transform:rotate(-.4deg)}
+.col.road{position:sticky;top:24px;transform:rotate(.5deg)}
+.col h2{display:flex;align-items:center;gap:12px;font-family:var(--hand);font-size:40px;line-height:1}
+.col h2 .ic{flex:none;width:36px;height:36px;padding:6px;border:2px solid var(--ink);border-radius:9px 7px 10px 6px;background:var(--hl)}
+
+/* One entry: a small tag, then a heading with a short note under it */
+.entries{list-style:none;margin-top:18px}
+.entries li{position:relative;display:flex;gap:12px;align-items:flex-start;padding:14px 0}
+/* The app's row lines: centred, dashed, fading out before the edges, none above the first row */
+.entries li+li::before{content:"";position:absolute;top:0;left:12%;right:12%;border-top:2px dashed var(--dash);-webkit-mask:linear-gradient(to right,transparent,#000 30%,#000 70%,transparent);mask:linear-gradient(to right,transparent,#000 30%,#000 70%,transparent)}
+.tag{flex:none;min-width:64px;margin-top:1px;padding:3px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--card);font-size:12px;font-weight:800;letter-spacing:.06em;text-align:center;text-transform:uppercase}
+.tag.next{background:var(--hl)}
+.tag.dotted{border-style:dashed}
+.what{font-size:16px;line-height:1.4}
+.what small{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
+/* Something that hasn't happened yet */
+.entries li.soon{opacity:.55}
+
+.foot{margin-top:56px}
+.dotline{display:block;width:100%;height:8px;color:var(--faint)}
+.foot p{margin-top:16px;text-align:center;font-size:15px;color:var(--muted)}
+.foot a{font-weight:700;background:linear-gradient(transparent 60%,var(--hl-soft) 60%,var(--hl-soft) 95%,transparent 95%)}
+
+@media (max-width:860px){
+  .head,.cols{grid-template-columns:1fr}
+  .col.road{order:-1;position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg class="paper" aria-hidden="true">
+  <defs>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0.36  0 0 0 0 0.3  0 0 0 0 0.2  0.9 0 0 0 -0.28"/></filter>
+    <filter id="blotch" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.01" numOctaves="2" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 0.62  0 0 0 0 0.52  0 0 0 0 0.32  0.5 0 0 0 -0.12"/></filter>
+  </defs>
+  <rect width="100%" height="100%" filter="url(#blotch)" opacity="0.12"/>
+  <rect width="100%" height="100%" filter="url(#grain)" opacity="0.18"/>
+</svg>
+<svg class="defs" aria-hidden="true">
+  <defs><filter id="rough" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="2.5"/></filter></defs>
+  <symbol id="dotline" viewBox="0 0 760 8" preserveAspectRatio="none"><path d="M2 4 C 60 1, 120 7, 190 4 S 320 1, 380 4 S 500 7, 570 4 S 700 1, 758 4" vector-effect="non-scaling-stroke"/></symbol>
+  <symbol id="flame" viewBox="0 0 24 24"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></symbol>
+  <symbol id="log" viewBox="0 0 24 24"><path d="M6 3.5h9l3.5 3.5v13.5H6zM15 3.5V7h3.5M9 11h6.5M9 14.5h6.5M9 18h4"/></symbol>
+  <symbol id="map" viewBox="0 0 24 24"><path d="M9 4L3 6.5V20l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4zM9 4v13.5M15 6.5V20"/></symbol>
+</svg>
+
+<!-- What's new: the changelog and the roadmap. To add an entry, copy an <li> in the right list.
+     Tags: "next" is filled in; "dotted" is for Alpha and Idea; class="soon" fades a coming entry. -->
+<main>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><svg class="ic" width="32" height="32" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg><a href="./">FindNotes</a>
+        <span class="stage-tag">alpha <small data-app-version></small></span></div>
+      <a class="wob pill-link" href="https://app.findnotes.io/">Add to your phone</a>
+    </div>
+
+    <div class="head">
+      <div>
+        <h1>What's <span class="hl">new</span></h1>
+        <p class="lede">FindNotes is in alpha. Here's what's coming next, and what's been added so far.</p>
+      </div>
+      <div class="card now">
+        <div class="k">Latest version</div>
+        <div class="v"><span data-app-version></span> <span class="stamp">alpha</span></div>
+        <p>Your phone picks it up from Settings › Version.</p>
+      </div>
+    </div>
+
+    <div class="cols">
+      <section class="card col log">
+        <h2><svg class="ic" aria-hidden="true"><use href="#log"/></svg>Changelog</h2>
+        <ol class="entries">
+          <li class="soon"><span class="tag dotted">Beta</span><span class="what">Coming soon<small>Once the phone app has settled into everyday use.</small></span></li>
+          <li><span class="tag dotted">Alpha</span><span class="what">It's just a fancy to-do list<small>A place to keep the thoughts that need remembering and the ideas that need exploring, together.</small></span></li>
+        </ol>
+      </section>
+      <section class="card col road">
+        <h2><svg class="ic" aria-hidden="true"><use href="#map"/></svg>Roadmap</h2>
+        <ul class="entries">
+          <li><span class="tag next">Next</span><span class="what">Drink more coffee<small>It's time to test FindNotes in the real world, and to see if more coffee leads to new ideas or unnecessary revisions.</small></span></li>
+          <li><span class="tag dotted">Idea</span><span class="what">A desktop version<small>FindNotes was designed for the phone, but a bigger screen might be nice. Notes live on each device, so they wouldn't sync between devices.</small></span></li>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <svg class="dotline" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 9" aria-hidden="true"><use href="#dotline"/></svg>
+      <p>Made by Quirks · © 2026 · <a href="./">Back to FindNotes</a></p>
+    </footer>
+  </div>
+</main>
+<script src="version.js" defer></script>
+</body>
+</html>
