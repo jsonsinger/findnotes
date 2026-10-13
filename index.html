@@ -50,12 +50,20 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
 .foot{margin-top:56px}
 .dotline{display:block;width:100%;height:8px;color:var(--faint)}
 .foot p{margin-top:16px;text-align:center;font-size:15px;color:var(--muted)}
+.foot a{font-weight:700;background:linear-gradient(transparent 60%,var(--hl-soft) 60%,var(--hl-soft) 95%,transparent 95%)}
+.faq dd a{font-weight:700;text-decoration:underline}
 
 /* ================= DESKTOP: landing page ================= */
 .land{max-width:1120px;margin:0 auto;padding-top:18px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .pill-link{font-family:var(--hand);font-size:24px;font-weight:700;padding:8px 20px 10px;background:var(--card);transition:transform .15s}
 .pill-link:hover{transform:rotate(-2deg)}
+/* The stage tag beside the name: a scrap of highlighter tape that links to What's new. The version
+   number is filled in by version.js from the live app, so it never goes stale. */
+.stage-tag{display:inline-flex;align-items:baseline;gap:6px;margin-left:4px;padding:3px 11px 5px;background:var(--hl);border:2px solid var(--ink);border-radius:14px 9px 13px 8px/9px 13px 8px 14px;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1;transform:rotate(-4deg) translateY(-3px);transition:transform .15s}
+.stage-tag small{font-family:var(--body);font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--soft)}
+.stage-tag small:empty{display:none}
+.stage-tag:hover{transform:rotate(1deg) translateY(-4px)}
 .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding-top:72px}
 .hero h1{font-family:var(--hand);font-weight:700;font-size:clamp(54px,7.4vw,96px);line-height:.92;text-wrap:balance}
 .hero .lede{font-size:21px;max-width:30ch;margin-top:22px}
@@ -234,7 +242,8 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 <main>
   <div class="land">
     <div class="top">
-      <div class="brand"><svg class="ic" width="32" height="32" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg>FindNotes</div>
+      <div class="brand"><svg class="ic" width="32" height="32" filter="url(#rough)" aria-hidden="true"><use href="#flame"/></svg>FindNotes
+        <a class="stage-tag" href="whats-new.html" title="What's new">alpha <small data-app-version></small></a></div>
       <a class="wob pill-link" href="https://app.findnotes.io/">Add to your phone</a>
     </div>
 
@@ -339,15 +348,17 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
       <div><dt>Where are my notes kept?</dt><dd>On your phone, inside the app. Nothing is uploaded and nothing syncs.</dd></div>
       <div><dt>How do I get it?</dt><dd>Tap Get FindNotes on your phone. The app shows you how to add it to your home screen.</dd></div>
       <div><dt>Can I back it up?</dt><dd>Yes. Export everything to a file from Settings and restore it any time.</dd></div>
+      <div><dt>Is it finished?</dt><dd>Nearly. Everything works, but it is still being tested day to day, so things may change. <a href="whats-new.html">See what's new</a>.</dd></div>
     </dl>
 
     <footer class="foot">
       <svg class="dotline" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 9" aria-hidden="true"><use href="#dotline"/></svg>
-      <p>Made by Quirks · © 2026</p>
+      <p>Made by Quirks · © 2026 · <a href="whats-new.html">What's new</a></p>
     </footer>
   </div>
 </main>
 
+<script src="version.js" defer></script>
 <script>
 // Feature card animations: they play while a card is hovered and reset when the pointer leaves.
 // Without hover (phones), each plays once as its card scrolls into view. Reduced motion: none.
