@@ -53,7 +53,6 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
 .now .k{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .now .v{display:flex;align-items:baseline;gap:12px;margin-top:6px;min-height:54px;font-family:var(--hand);font-size:54px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
 .stamp{font-family:var(--hand);font-size:22px;padding:1px 10px 3px;border:2px solid var(--ink);border-radius:8px 6px 9px 5px;background:var(--hl);transform:rotate(-6deg)}
-.now p{margin-top:8px;font-size:15px;color:var(--muted)}
 
 /* Changelog on the left; the roadmap is narrower and stays in view while you scroll */
 .cols{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:40px 34px;margin-top:64px;align-items:start}
@@ -123,7 +122,6 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
       <div class="card now">
         <div class="k">Latest version</div>
         <div class="v"><span data-app-version></span> <span class="stamp">alpha</span></div>
-        <p>Your phone picks it up from Settings › Version.</p>
       </div>
     </div>
 
@@ -131,7 +129,7 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
       <section class="card col log">
         <h2><svg class="ic" aria-hidden="true"><use href="#log"/></svg>Changelog</h2>
         <ol class="entries">
-          <li class="soon"><span class="tag dotted">Beta</span><span class="what">Coming soon<small>Once the phone app has settled into everyday use.</small></span></li>
+          <li class="soon"><span class="tag dotted">Beta</span><span class="what">Coming soon</span></li>
           <li><span class="tag dotted">Alpha</span><span class="what">It's just a fancy to-do list<small>A place to keep the thoughts that need remembering and the ideas that need exploring, together.</small></span></li>
         </ol>
       </section>
