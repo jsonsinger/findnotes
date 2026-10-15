@@ -49,7 +49,9 @@ main{position:relative;z-index:1;padding-inline:16px;padding-block:0 40px}
 .num{flex:none;width:40px;height:40px;border:2px solid var(--ink);border-radius:52% 48% 50% 50%/50% 52% 48% 50%;display:grid;place-items:center;font-family:var(--hand);font-size:28px;font-weight:700;line-height:1;background:var(--hl)}
 .foot{margin-top:56px}
 .dotline{display:block;width:100%;height:8px;color:var(--faint)}
-.foot p{margin-top:16px;text-align:center;font-size:15px;color:var(--muted)}
+.foot p{margin-top:16px;text-align:center;font-size:12px;color:var(--muted)}
+.foot .credit{font-style:italic;line-height:1.5}
+.foot .credit + p{margin-top:8px}
 .foot a{font-weight:700;background:linear-gradient(transparent 60%,var(--hl-soft) 60%,var(--hl-soft) 95%,transparent 95%)}
 .faq dd a{font-weight:700;text-decoration:underline}
 
@@ -344,16 +346,17 @@ mark{background:var(--hl-soft);color:inherit;padding:0 2px}
 
     <dl class="faq">
       <h2 class="faq-head">Questions</h2>
-      <div><dt>Is it really free?</dt><dd>Yes. No account, no sign-up, nothing to pay.</dd></div>
-      <div><dt>Where are my notes kept?</dt><dd>On your phone, inside the app. Nothing is uploaded and nothing syncs.</dd></div>
+      <div><dt>Is it really free?</dt><dd>Yes. No account, no sign-up, nothing to pay. It's offered as is, so use it at your own risk.</dd></div>
+      <div><dt>Where are my notes kept?</dt><dd>On your phone, inside the app. Nothing is uploaded and nothing syncs, so it stays private, and it's yours to look after.</dd></div>
       <div><dt>How do I get it?</dt><dd>Tap Get FindNotes on your phone. The app shows you how to add it to your home screen.</dd></div>
-      <div><dt>Can I back it up?</dt><dd>Yes. Export everything to a file from Settings and restore it any time.</dd></div>
+      <div><dt>Can I back it up?</dt><dd>Yes, and it's worth doing. Export everything from Settings now and then.</dd></div>
       <div><dt>Is it finished?</dt><dd>Nearly. Everything works, but it is still being tested day to day, so things may change. <a href="whats-new.html">See what's new</a>.</dd></div>
     </dl>
 
     <footer class="foot">
       <svg class="dotline" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 9" aria-hidden="true"><use href="#dotline"/></svg>
-      <p>Made by Quirks · © 2026 · <a href="whats-new.html">What's new</a></p>
+      <p class="credit">Built by Quirks<br>Claude lent a hand. Coffee did the rest.</p>
+      <p>© 2026 · <a href="whats-new.html">What's new</a></p>
     </footer>
   </div>
 </main>
